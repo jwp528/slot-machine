@@ -2,24 +2,15 @@
   <v-container
     fluid
     :class="{
-    'pa-0': $vuetify.breakpoint.smAndDown
+    'pa-0': $vuetify.breakpoint.smAndDown,
+    'ma-0': $vuetify.breakpoint.smAndDown
   }"
-    @click="$vuetify.breakpoint.smAndDown ? spin() : null"
   >
     <v-row>
       <v-col cols="12">
         <v-row align="center" justify="center" fill-height>
-          <v-col cols="12" md="8">
+          <v-col cols="12" md="6">
             <v-card class="px-5" :color="slotColor">
-              <audio ref="spin">
-                <source src="../assets/sounds/spin.mp3" />
-              </audio>
-              <audio ref="coin">
-                <source src="../assets/sounds/coin.mp3" />
-              </audio>
-              <audio ref="win">
-                <source src="../assets/sounds/win.mp3" />
-              </audio>
               <v-row>
                 <v-col cols="12" class="pb-0 mb-5">
                   <v-card color="black" class="px-5 digital green--text">
@@ -71,7 +62,7 @@
                 <v-col cols="4" v-for="i in 9" :key="i" class="pt-0">
                   <slot-reel :index="i" ref="slotreel" />
                 </v-col>
-                <v-col cols="4" class="mx-auto" v-if="$vuetify.breakpoint.mdAndUp">
+                <v-col cols="4" class="mx-auto">
                   <v-btn block x-large tile color="primary" @click="spin" :disabled="spinning">SPIN!</v-btn>
                 </v-col>
               </v-row>
@@ -79,6 +70,15 @@
           </v-col>
         </v-row>
       </v-col>
+      <audio ref="spin">
+        <source src="../assets/sounds/spin.mp3" />
+      </audio>
+      <audio ref="coin">
+        <source src="../assets/sounds/coin.mp3" />
+      </audio>
+      <audio ref="win">
+        <source src="../assets/sounds/win.mp3" />
+      </audio>
       <!-- <v-col cols="12">
         <winnings :wins="wins" />
       </v-col>-->
@@ -136,6 +136,8 @@ export default {
       this.$refs.coin.play()
     },
     spin () {
+      if (this.spinning) { return }
+
       if (this.tokens < this.cost) {
         alert('You\'re out of tokens! time to go home.')
         return

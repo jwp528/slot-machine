@@ -19,7 +19,9 @@
       <v-btn color="primary">Sign In</v-btn>
     </v-app-bar>
 
-    <v-content>
+    <v-content :class="{
+      'py-5': $vuetify.breakpoint.smAndDown
+    }">
       <v-img src="./assets/bg.jpg" max-height="100vh">
         <router-view />
       </v-img>

@@ -1,10 +1,15 @@
 <template>
-  <v-card light tile class="py-5">
+  <v-card light tile class="py-5" :max-height="$vuetify.breakpoint.smAndDown ? '100px' : 'auto'">
     <audio ref="stop">
       <source src="../assets/sounds/stop.mp3" />
     </audio>
-    <v-card-text class="display-4 font-weight-thin text-center" min-height="1000px">
-      <v-icon :color="tile.color" :size="$vuetify.breakpoint.mdAndUp ? 72 : 42">mdi-{{tile.icon}}</v-icon>
+    <v-card-text
+      :class="{
+      'display-4': $vuetify.breakpoint.mdAndUp,
+      'font-weight-thin text-center': true
+    }"
+    >
+      <v-icon :color="tile.color" :size="$vuetify.breakpoint.mdAndUp ? 72 : 36">mdi-{{tile.icon}}</v-icon>
     </v-card-text>
   </v-card>
 </template>
