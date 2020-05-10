@@ -4,7 +4,7 @@
       <source src="../assets/sounds/stop.mp3" />
     </audio>
     <v-card-text class="display-4 font-weight-thin text-center" min-height="1000px">
-      <v-icon :color="tile.color" :size="72">mdi-{{tile.icon}}</v-icon>
+      <v-icon :color="tile.color" :size="$vuetify.breakpoint.mdAndUp ? 72 : 42">mdi-{{tile.icon}}</v-icon>
     </v-card-text>
   </v-card>
 </template>

@@ -152,11 +152,11 @@ const getLucky = (reels) => {
     winnings: 0,
     label: []
   }
-  const lucky = reels.some(reel => reel.label === 'shamrock')
+  const lucky = reels.some(reel => reel.label === 'Shamrocks')
 
   if (lucky) {
-    results.winnings += valueTable.lucky
-    results.label.push('lucky')
+    results.winnings += valueTable.Lucky
+    results.label.push('Lucky')
   }
 
   return results

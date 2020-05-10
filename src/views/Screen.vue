@@ -1,9 +1,11 @@
 <template>
-  <v-container fluid>
+  <v-container fluid :class="{
+    'pa-0': $vuetify.breakpoint.smAndDown
+  }">
     <v-row>
       <v-col cols="12">
         <v-row align="center" justify="center" fill-height>
-          <v-col cols="8">
+          <v-col cols="12" md="8">
             <v-card class="px-5" :color="slotColor">
               <audio ref="spin">
                 <source src="../assets/sounds/spin.mp3" />
@@ -14,8 +16,6 @@
               <audio ref="win">
                 <source src="../assets/sounds/win.mp3" />
               </audio>
-
-              <v-card-title class="display-4 font-weight-thin justify-center">Roll 'em Slots</v-card-title>
               <v-row>
                 <v-col cols="12" class="pb-0 mb-5">
                   <v-card color="black" class="px-5 digital green--text">
@@ -31,7 +31,12 @@
                       </v-col>
                       <v-col cols="4">
                         <p class="text-center">
-                          <v-btn x-small class="digital" @click="cashOut">Cash Out</v-btn>
+                          <v-btn
+                            x-small
+                            class="digital"
+                            @click="cashOut"
+                            :disabled="spinning"
+                          >Cash Out</v-btn>
                           <br />
                           {{status}}
                           <br />
@@ -48,6 +53,7 @@
                             x-small
                             class="digital text-right"
                             @click="convertPointsToTokens"
+                            :disabled="spinning"
                           >Convert</v-btn>
                           <br />
                           <span class="overline digital">Score:</span>
@@ -170,7 +176,7 @@ export default {
     },
     convertPointsToTokens () {
       if (this.score < 10) { alert('you need at least 10 points to convert your points to tokens') }
-      this.winnings = this.score * 0.1
+      this.winnings += this.score * 0.1
       this.score = 0
       this.payout()
     },
@@ -224,8 +230,10 @@ export default {
           }
 
           this.$refs.coin.play()
-        }, 50)
+        }, 25)
       }, 2000)
+
+      console.log('test')
     }
   }
 }
