@@ -1,7 +1,11 @@
 <template>
-  <v-container fluid :class="{
+  <v-container
+    fluid
+    :class="{
     'pa-0': $vuetify.breakpoint.smAndDown
-  }">
+  }"
+    @click="$vuetify.breakpoint.smAndDown ? spin() : null"
+  >
     <v-row>
       <v-col cols="12">
         <v-row align="center" justify="center" fill-height>
@@ -67,7 +71,7 @@
                 <v-col cols="4" v-for="i in 9" :key="i" class="pt-0">
                   <slot-reel :index="i" ref="slotreel" />
                 </v-col>
-                <v-col cols="4" class="mx-auto">
+                <v-col cols="4" class="mx-auto" v-if="$vuetify.breakpoint.mdAndUp">
                   <v-btn block x-large tile color="primary" @click="spin" :disabled="spinning">SPIN!</v-btn>
                 </v-col>
               </v-row>
